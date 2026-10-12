@@ -1,0 +1,23 @@
+services:
+  engine:
+    build:
+      context: .
+      args:
+        BUILD_SHA: ${BUILD_SHA:-dev}
+    image: hansard-mcp:latest
+    restart: always
+    environment:
+      MP_HOST: 0.0.0.0
+      MP_PORT: 8093
+      MP_LOG_LEVEL: info
+      # Cache is in-process today; MemoryStore implements the interface Redis
+      # will use, so adding it is a config change rather than a rewrite.
+      MP_CACHE_ENABLED: "true"
+    ports:
+      # Bound to loopback: nginx is the only thing that should reach it.
+      - "127.0.0.1:8093:8093"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8093/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

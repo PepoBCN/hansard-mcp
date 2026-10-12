@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Evaluations for parliament-mcp-engine.
+
+  Each question is independent, read-only, needs more than one tool call, and has
+  a single string-comparable answer that will not change (all reference settled
+  historical facts, not current standings). Every answer below was verified by
+  running the engine against the live Parliament APIs, not asserted from memory.
+
+  The last two are adversarial: they test the behaviour this engine exists to
+  guarantee — that a degraded lookup is never reported as an absence.
+-->
+<evaluation>
+  <qa_pair>
+    <question>Find the Commons division on the Draft Climate Change Act 2008 (Credit Limit) Order 2026. What was the majority?</question>
+    <answer>237</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>There was a Commons division simply titled "Climate Change" on 20 July 2016. What was the majority?</question>
+    <answer>102</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>In the division on the Draft Climate Change Act 2008 (Credit Limit) Order 2026, which party contributed the most aye votes?</question>
+    <answer>Labour</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Look up the bill with id 195. Has it received Royal Assent — answer yes or no?</question>
+    <answer>yes</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Which parliamentary constituency contains the postcode SW1A 0AA?</question>
+    <answer>Cities of London and Westminster</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Who won the 2024 general election in Islington North, and under what party label? Give the party.</question>
+    <answer>Independent</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>What was the majority in Islington North at the 2024 general election?</question>
+    <answer>7247</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Diane Abbott has held several shadow cabinet posts. Which one made her the first Black woman to hold that office — the most senior of her shadow roles?</question>
+    <answer>Shadow Home Secretary</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Find the Commons debate titled "Climate Change: Resilience Planning". On what date did it take place? Answer in YYYY-MM-DD form.</question>
+    <answer>2026-07-07</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>What is the committee id of the Treasury Committee?</question>
+    <answer>158</answer>
+  </qa_pair>
+
+  <!-- Adversarial: the behaviour that motivated the rebuild. -->
+  <qa_pair>
+    <question>Run a topic tracker on any policy topic. If the written questions section comes back empty while meta.sources_status.written_questions reports "timeout", is it correct to tell the user that no written questions have been tabled on that topic? Answer yes or no.</question>
+    <answer>no</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>In a topic_tracker response, data.retrieval.petitions shows returned_by_upstream 14 and kept_after_relevance 0, and meta.sources_status.petitions reports "ok". What does this mean — that Parliament's petitions API returned nothing, or that it returned petitions none of which were about the topic?</question>
+    <answer>it returned petitions none of which were about the topic</answer>
+  </qa_pair>
+</evaluation>
